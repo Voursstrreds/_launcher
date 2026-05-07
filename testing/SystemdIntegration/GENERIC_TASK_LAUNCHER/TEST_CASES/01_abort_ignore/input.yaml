@@ -1,0 +1,19 @@
+# Case 01 — Child:  FailureBehavior=Abort, DependencyBehavior=Ignore.
+# Expected emission on child:
+#   Requires=si-01-parent.service
+#   After=si-01-parent.service
+#   (no PartOf, no Restart= block, no StartLimit* knobs)
+Parent:
+  Name: si-01-parent
+  Type: Entry
+  Path: /home/mehmet/Mehmet/Tez/PROJECT/Utilities/SystemdUnitsTesting/bin/generic-unit
+  Arg1: infinite
+
+Child:
+  Name: si-01-child
+  Type: Entry
+  Path: /home/mehmet/Mehmet/Tez/PROJECT/Utilities/SystemdUnitsTesting/bin/generic-unit
+  Arg1: infinite
+  Depends: Parent
+  FailureBehavior: Abort
+  DependencyBehavior: Ignore

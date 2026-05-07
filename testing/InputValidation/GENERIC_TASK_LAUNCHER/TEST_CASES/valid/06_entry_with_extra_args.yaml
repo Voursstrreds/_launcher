@@ -1,0 +1,6 @@
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+  Arg1: --verbose
+  Arg2: --output=/tmp/result.log

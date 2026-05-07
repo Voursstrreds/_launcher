@@ -1,0 +1,42 @@
+# H,I standalone with args alongside A,B,C in G1 with deps.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+  Group:
+    - G1
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Depends:
+    - C
+  Group:
+    - G1
+
+C:
+  Name: c
+  Type: Entry
+  Path: /usr/bin/c
+  Group:
+    - G1
+
+H:
+  Name: h
+  Type: Entry
+  Path: /usr/bin/h
+  Verbose: --verbose
+  Port: "8080"
+
+I:
+  Name: i
+  Type: Entry
+  Path: /usr/bin/i
+  Output: /tmp/out.log
+
+G1:
+  Name: g1
+  Type: Group

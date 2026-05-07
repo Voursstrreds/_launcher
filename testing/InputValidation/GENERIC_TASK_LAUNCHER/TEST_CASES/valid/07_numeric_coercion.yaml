@@ -1,0 +1,6 @@
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+  Port: 8080
+  Count: 42

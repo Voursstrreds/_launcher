@@ -1,0 +1,11 @@
+# Group exists but nobody references it and it has no members.
+# Expected group_of:   A -> [], G1 -> []
+# Expected members_of: A -> [], G1 -> []
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+
+G1:
+  Name: g1
+  Type: Group

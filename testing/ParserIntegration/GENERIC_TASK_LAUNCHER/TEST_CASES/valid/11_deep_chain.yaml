@@ -1,0 +1,54 @@
+# 8-node linear chain: A→B→C→D→E→F→G→H.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Depends:
+    - C
+
+C:
+  Name: c
+  Type: Entry
+  Path: /usr/bin/c
+  Depends:
+    - D
+
+D:
+  Name: d
+  Type: Entry
+  Path: /usr/bin/d
+  Depends:
+    - E
+
+E:
+  Name: e
+  Type: Entry
+  Path: /usr/bin/e
+  Depends:
+    - F
+
+F:
+  Name: f
+  Type: Entry
+  Path: /usr/bin/f
+  Depends:
+    - G
+
+G:
+  Name: g
+  Type: Entry
+  Path: /usr/bin/g
+  Depends:
+    - H
+
+H:
+  Name: h
+  Type: Entry
+  Path: /usr/bin/h

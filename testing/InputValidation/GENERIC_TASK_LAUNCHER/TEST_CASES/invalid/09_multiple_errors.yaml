@@ -1,0 +1,3 @@
+# Multiple validation failures: missing Name and Path
+Program1:
+  Type: Entry

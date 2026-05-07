@@ -1,0 +1,25 @@
+# A depends on B, C, and D (one node depends on many).
+# Expected before: B -> [A], C -> [A], D -> [A], A -> []
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+    - C
+    - D
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+
+C:
+  Name: c
+  Type: Entry
+  Path: /usr/bin/c
+
+D:
+  Name: d
+  Type: Entry
+  Path: /usr/bin/d

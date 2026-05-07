@@ -1,0 +1,9 @@
+# Extra args with integer values should be coerced to strings.
+# Also tests that extra args that are already strings pass through.
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+  Port: 8080
+  Retries: 3
+  Label: production

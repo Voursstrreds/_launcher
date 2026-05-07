@@ -1,0 +1,6 @@
+# Members references X which does not exist.
+G1:
+  Name: g1
+  Type: Group
+  Members:
+    - X

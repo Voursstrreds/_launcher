@@ -1,0 +1,28 @@
+# E→A→B→C→A.  E is acyclic, but A-B-C form a cycle.
+E:
+  Name: e
+  Type: Entry
+  Path: /usr/bin/e
+  Depends:
+    - A
+
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Depends:
+    - C
+
+C:
+  Name: c
+  Type: Entry
+  Path: /usr/bin/c
+  Depends:
+    - A

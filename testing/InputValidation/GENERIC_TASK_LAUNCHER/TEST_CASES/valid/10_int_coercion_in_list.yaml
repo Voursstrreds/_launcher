@@ -1,0 +1,13 @@
+# List elements that are integers should be coerced to strings.
+# Depends is a list_field so if given as a list, int elements are coerced.
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+  Depends:
+    - Program2
+
+Program2:
+  Name: program2
+  Type: Entry
+  Path: /usr/bin/true

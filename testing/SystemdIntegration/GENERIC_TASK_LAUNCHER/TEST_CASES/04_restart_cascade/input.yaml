@@ -1,0 +1,21 @@
+# Case 04 — Child:  FailureBehavior=Restart, DependencyBehavior=Cascade.
+# Expected emission on child:
+#   Requires=si-04-parent.service
+#   After=si-04-parent.service
+#   PartOf=si-04-parent.service
+#   StartLimitIntervalSec=30 / StartLimitBurst=5
+#   Restart=on-failure / RestartSec=2
+Parent:
+  Name: si-04-parent
+  Type: Entry
+  Path: /home/mehmet/Mehmet/Tez/PROJECT/Utilities/SystemdUnitsTesting/bin/generic-unit
+  Arg1: infinite
+
+Child:
+  Name: si-04-child
+  Type: Entry
+  Path: /home/mehmet/Mehmet/Tez/PROJECT/Utilities/SystemdUnitsTesting/bin/generic-unit
+  Arg1: infinite
+  Depends: Parent
+  FailureBehavior: Restart
+  DependencyBehavior: Cascade

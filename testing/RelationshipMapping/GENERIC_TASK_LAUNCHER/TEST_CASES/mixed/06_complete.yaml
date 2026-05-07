@@ -1,0 +1,30 @@
+# Complete: every non-group depends on every other non-group,
+# and all entries belong to the single group (via both sides).
+# A depends on B. B depends on A. Both declare Group: G1. G1 declares Members: [A, B].
+# Expected before:     A -> [B], B -> [A], G1 -> []
+# Expected group_of:   A -> [G1], B -> [G1], G1 -> []
+# Expected members_of: G1 -> [A, B], A -> [], B -> []
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+  Group:
+    - G1
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Depends:
+    - A
+  Group:
+    - G1
+
+G1:
+  Name: g1
+  Type: Group
+  Members:
+    - A
+    - B

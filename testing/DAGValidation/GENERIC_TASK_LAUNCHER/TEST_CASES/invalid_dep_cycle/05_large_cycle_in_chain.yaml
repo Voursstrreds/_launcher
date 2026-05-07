@@ -1,0 +1,151 @@
+# 22 nodes. Long chain N1→N2→...→N20 with a cycle back from N20→N10.
+# N21 and N22 are disconnected observers.
+N1:
+  Name: n1
+  Type: Entry
+  Path: /usr/bin/n1
+  Depends:
+    - N2
+
+N2:
+  Name: n2
+  Type: Entry
+  Path: /usr/bin/n2
+  Depends:
+    - N3
+
+N3:
+  Name: n3
+  Type: Entry
+  Path: /usr/bin/n3
+  Depends:
+    - N4
+
+N4:
+  Name: n4
+  Type: Entry
+  Path: /usr/bin/n4
+  Depends:
+    - N5
+
+N5:
+  Name: n5
+  Type: Entry
+  Path: /usr/bin/n5
+  Depends:
+    - N6
+
+N6:
+  Name: n6
+  Type: Entry
+  Path: /usr/bin/n6
+  Depends:
+    - N7
+
+N7:
+  Name: n7
+  Type: Entry
+  Path: /usr/bin/n7
+  Depends:
+    - N8
+
+N8:
+  Name: n8
+  Type: Entry
+  Path: /usr/bin/n8
+  Depends:
+    - N9
+
+N9:
+  Name: n9
+  Type: Entry
+  Path: /usr/bin/n9
+  Depends:
+    - N10
+
+N10:
+  Name: n10
+  Type: Entry
+  Path: /usr/bin/n10
+  Depends:
+    - N11
+
+N11:
+  Name: n11
+  Type: Entry
+  Path: /usr/bin/n11
+  Depends:
+    - N12
+
+N12:
+  Name: n12
+  Type: Entry
+  Path: /usr/bin/n12
+  Depends:
+    - N13
+
+N13:
+  Name: n13
+  Type: Entry
+  Path: /usr/bin/n13
+  Depends:
+    - N14
+
+N14:
+  Name: n14
+  Type: Entry
+  Path: /usr/bin/n14
+  Depends:
+    - N15
+
+N15:
+  Name: n15
+  Type: Entry
+  Path: /usr/bin/n15
+  Depends:
+    - N16
+
+N16:
+  Name: n16
+  Type: Entry
+  Path: /usr/bin/n16
+  Depends:
+    - N17
+
+N17:
+  Name: n17
+  Type: Entry
+  Path: /usr/bin/n17
+  Depends:
+    - N18
+
+N18:
+  Name: n18
+  Type: Entry
+  Path: /usr/bin/n18
+  Depends:
+    - N19
+
+N19:
+  Name: n19
+  Type: Entry
+  Path: /usr/bin/n19
+  Depends:
+    - N20
+
+N20:
+  Name: n20
+  Type: Entry
+  Path: /usr/bin/n20
+  Depends:
+    - N10
+
+N21:
+  Name: n21
+  Type: Entry
+  Path: /usr/bin/n21
+
+N22:
+  Name: n22
+  Type: Entry
+  Path: /usr/bin/n22

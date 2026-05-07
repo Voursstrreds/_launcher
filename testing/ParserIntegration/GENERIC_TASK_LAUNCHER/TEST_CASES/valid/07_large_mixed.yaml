@@ -1,0 +1,62 @@
+# 10 nodes: 6 entries, 2 groups nested. A→B,C. B→D. C→D. D→E.
+# A,B,C in G1. D,E in G2. G1 in G2. F standalone with args.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+    - C
+  Group:
+    - G1
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Depends:
+    - D
+  Group:
+    - G1
+
+C:
+  Name: c
+  Type: Entry
+  Path: /usr/bin/c
+  Depends:
+    - D
+  Group:
+    - G1
+
+D:
+  Name: d
+  Type: Entry
+  Path: /usr/bin/d
+  Depends:
+    - E
+  Group:
+    - G2
+
+E:
+  Name: e
+  Type: Entry
+  Path: /usr/bin/e
+  Group:
+    - G2
+
+F:
+  Name: f
+  Type: Entry
+  Path: /usr/bin/f
+  Mode: --daemon
+  Port: "9090"
+
+G1:
+  Name: g1
+  Type: Group
+  Group:
+    - G2
+
+G2:
+  Name: g2
+  Type: Group

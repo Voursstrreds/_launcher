@@ -1,0 +1,9 @@
+[Unit]
+Description=g1.target UNIT FILE
+Requires=a.service b.service c.service
+Before=g2.target
+After=a.service b.service c.service
+
+[Install]
+RequiredBy=g2.target
+

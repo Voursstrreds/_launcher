@@ -1,0 +1,14 @@
+# A depends on B.
+# A: after=[B], before=[]
+# B: after=[], before=[A]
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b

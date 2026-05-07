@@ -1,0 +1,22 @@
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+  Depends: Program2 Program3
+  Group: Group1
+
+Program2:
+  Name: program2
+  Type: Entry
+  Path: /usr/bin/true
+  Depends: Program3
+
+Program3:
+  Name: program3
+  Type: Entry
+  Path: /usr/bin/false
+
+Group1:
+  Name: group1
+  Type: Group
+  Members: Program1

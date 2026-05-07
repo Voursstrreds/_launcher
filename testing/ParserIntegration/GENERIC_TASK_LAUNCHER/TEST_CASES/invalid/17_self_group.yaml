@@ -1,0 +1,6 @@
+# G1 is a member of itself.
+G1:
+  Name: g1
+  Type: Group
+  Group:
+    - G1

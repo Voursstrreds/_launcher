@@ -1,0 +1,27 @@
+# Diamond: A→B, A→C, B→D, C→D.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+    - C
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Depends:
+    - D
+
+C:
+  Name: c
+  Type: Entry
+  Path: /usr/bin/c
+  Depends:
+    - D
+
+D:
+  Name: d
+  Type: Entry
+  Path: /usr/bin/d

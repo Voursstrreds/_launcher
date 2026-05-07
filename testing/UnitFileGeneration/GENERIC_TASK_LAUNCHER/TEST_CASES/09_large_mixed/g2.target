@@ -1,0 +1,5 @@
+[Unit]
+Description=g2.target UNIT FILE
+Requires=d.service e.service f.service g1.target
+After=d.service e.service f.service g1.target
+

@@ -1,0 +1,38 @@
+# A,B in G1. C,D in G2. A→C — cross-group dependency.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - C
+  Group:
+    - G1
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Group:
+    - G1
+
+C:
+  Name: c
+  Type: Entry
+  Path: /usr/bin/c
+  Group:
+    - G2
+
+D:
+  Name: d
+  Type: Entry
+  Path: /usr/bin/d
+  Group:
+    - G2
+
+G1:
+  Name: g1
+  Type: Group
+
+G2:
+  Name: g2
+  Type: Group

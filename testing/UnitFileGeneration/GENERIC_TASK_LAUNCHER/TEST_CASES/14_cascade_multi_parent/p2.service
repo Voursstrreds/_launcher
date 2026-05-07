@@ -1,0 +1,6 @@
+[Unit]
+Description=p2.service UNIT FILE
+
+[Service]
+ExecStart=/usr/bin/p2
+

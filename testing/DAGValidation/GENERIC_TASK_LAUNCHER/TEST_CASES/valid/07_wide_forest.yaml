@@ -1,0 +1,167 @@
+# 24 nodes. Three independent sub-trees merging at a shared root layer.
+# Tree 1: A1→A2→A3→A4→A5→Root1
+# Tree 2: B1→B2→B3→B4→B5→Root1
+# Tree 3: C1→C2→C3→C4→C5→Root1
+# Groups: G1 contains tree 1, G2 contains tree 2, G3 contains tree 3.
+# G1, G2, G3 all belong to GTop.
+A1:
+  Name: a1
+  Type: Entry
+  Path: /usr/bin/a1
+  Depends:
+    - A2
+  Group:
+    - G1
+
+A2:
+  Name: a2
+  Type: Entry
+  Path: /usr/bin/a2
+  Depends:
+    - A3
+  Group:
+    - G1
+
+A3:
+  Name: a3
+  Type: Entry
+  Path: /usr/bin/a3
+  Depends:
+    - A4
+  Group:
+    - G1
+
+A4:
+  Name: a4
+  Type: Entry
+  Path: /usr/bin/a4
+  Depends:
+    - A5
+  Group:
+    - G1
+
+A5:
+  Name: a5
+  Type: Entry
+  Path: /usr/bin/a5
+  Depends:
+    - Root1
+  Group:
+    - G1
+
+B1:
+  Name: b1
+  Type: Entry
+  Path: /usr/bin/b1
+  Depends:
+    - B2
+  Group:
+    - G2
+
+B2:
+  Name: b2
+  Type: Entry
+  Path: /usr/bin/b2
+  Depends:
+    - B3
+  Group:
+    - G2
+
+B3:
+  Name: b3
+  Type: Entry
+  Path: /usr/bin/b3
+  Depends:
+    - B4
+  Group:
+    - G2
+
+B4:
+  Name: b4
+  Type: Entry
+  Path: /usr/bin/b4
+  Depends:
+    - B5
+  Group:
+    - G2
+
+B5:
+  Name: b5
+  Type: Entry
+  Path: /usr/bin/b5
+  Depends:
+    - Root1
+  Group:
+    - G2
+
+C1:
+  Name: c1
+  Type: Entry
+  Path: /usr/bin/c1
+  Depends:
+    - C2
+  Group:
+    - G3
+
+C2:
+  Name: c2
+  Type: Entry
+  Path: /usr/bin/c2
+  Depends:
+    - C3
+  Group:
+    - G3
+
+C3:
+  Name: c3
+  Type: Entry
+  Path: /usr/bin/c3
+  Depends:
+    - C4
+  Group:
+    - G3
+
+C4:
+  Name: c4
+  Type: Entry
+  Path: /usr/bin/c4
+  Depends:
+    - C5
+  Group:
+    - G3
+
+C5:
+  Name: c5
+  Type: Entry
+  Path: /usr/bin/c5
+  Depends:
+    - Root1
+  Group:
+    - G3
+
+Root1:
+  Name: root1
+  Type: Entry
+  Path: /usr/bin/root1
+
+G1:
+  Name: g1
+  Type: Group
+  Group:
+    - GTop
+
+G2:
+  Name: g2
+  Type: Group
+  Group:
+    - GTop
+
+G3:
+  Name: g3
+  Type: Group
+  Group:
+    - GTop
+
+GTop:
+  Name: gtop
+  Type: Group

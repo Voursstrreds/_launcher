@@ -1,0 +1,44 @@
+# Large graph with a hidden unified cycle buried among valid nodes.
+# Valid part: D→E, F→E (no issues).
+# Cycle part: A member of G1. B depends on G1. A depends on B.
+# Dep graph: A→B, B→G1, D→E, F→E. Acyclic.
+# Group graph: A→G1. Acyclic.
+# Unified cycle: A→G1→B→A.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+  Group:
+    - G1
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Depends:
+    - G1
+
+D:
+  Name: d
+  Type: Entry
+  Path: /usr/bin/d
+  Depends:
+    - E
+
+E:
+  Name: e
+  Type: Entry
+  Path: /usr/bin/e
+
+F:
+  Name: f
+  Type: Entry
+  Path: /usr/bin/f
+  Depends:
+    - E
+
+G1:
+  Name: g1
+  Type: Group

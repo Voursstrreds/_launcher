@@ -1,0 +1,5 @@
+# Minimal path: single standalone entry.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a

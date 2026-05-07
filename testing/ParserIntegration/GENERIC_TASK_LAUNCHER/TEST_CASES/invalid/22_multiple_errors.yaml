@@ -1,0 +1,10 @@
+# Multiple validation errors: missing Name, missing Path, bad type.
+A:
+  Type: Entry
+
+B:
+  Name: b
+  Type: NotAType
+
+C:
+  Type: Group

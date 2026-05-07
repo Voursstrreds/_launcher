@@ -1,0 +1,5 @@
+Solo:
+  Name: solo-svc
+  Type: Service
+  Image: docker.io/library/alpine:latest
+  ContainerName: solo-svc

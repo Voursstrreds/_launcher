@@ -1,0 +1,9 @@
+[Unit]
+Description=p2.service UNIT FILE
+
+[Service]
+Type=simple
+ExecStart=podman run --name p2 docker.io/library/alpine:latest
+ExecStop=podman stop p2
+ExecStopPost=podman rm p2
+

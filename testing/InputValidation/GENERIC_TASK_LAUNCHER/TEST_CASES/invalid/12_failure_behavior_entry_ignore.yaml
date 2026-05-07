@@ -1,0 +1,7 @@
+# FailureBehavior: Ignore is no longer allowed under the two-axis model.
+# The legacy "Ignore" value is now expressed as DependencyBehavior: Ignore.
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+  FailureBehavior: Ignore

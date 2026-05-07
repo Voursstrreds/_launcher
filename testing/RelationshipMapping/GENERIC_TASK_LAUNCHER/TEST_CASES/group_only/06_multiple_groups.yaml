@@ -1,0 +1,25 @@
+# A belongs to G1 and G2. B belongs to G2 only (via Members).
+# Expected group_of:   A -> [G1, G2], B -> [G2], G1 -> [], G2 -> []
+# Expected members_of: G1 -> [A], G2 -> [A, B], A -> [], B -> []
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Group:
+    - G1
+    - G2
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+
+G1:
+  Name: g1
+  Type: Group
+
+G2:
+  Name: g2
+  Type: Group
+  Members:
+    - B

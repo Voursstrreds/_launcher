@@ -1,0 +1,9 @@
+[Unit]
+Description=appnet.service UNIT FILE
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=podman network create --ignore appnet
+ExecStop=podman network rm appnet
+

@@ -1,0 +1,10 @@
+[Unit]
+Description=a.service UNIT FILE
+Before=g1.target
+
+[Service]
+ExecStart=/usr/bin/a
+
+[Install]
+RequiredBy=g1.target
+

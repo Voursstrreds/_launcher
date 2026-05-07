@@ -1,0 +1,8 @@
+# Minimal Entry — only required fields.
+# unit_file_name should be 'prog1.service'.
+# command_string should be '/usr/bin/echo'.
+# All relationship lists empty.
+Program1:
+  Name: prog1
+  Type: Entry
+  Path: /usr/bin/echo

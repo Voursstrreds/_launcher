@@ -1,0 +1,6 @@
+[Unit]
+Description=h.service UNIT FILE
+
+[Service]
+ExecStart=/usr/bin/h 8080 --verbose
+

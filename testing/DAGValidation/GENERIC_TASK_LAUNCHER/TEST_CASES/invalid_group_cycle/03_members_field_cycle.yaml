@@ -1,0 +1,13 @@
+# Cycle via Members field: G1 declares G2 as member, G2 declares G1 as member.
+# After reconciliation: G2 member of G1, G1 member of G2 — cycle.
+G1:
+  Name: g1
+  Type: Group
+  Members:
+    - G2
+
+G2:
+  Name: g2
+  Type: Group
+  Members:
+    - G1

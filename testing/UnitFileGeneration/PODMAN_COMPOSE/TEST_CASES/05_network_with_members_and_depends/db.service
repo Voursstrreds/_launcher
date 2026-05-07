@@ -1,0 +1,13 @@
+[Unit]
+Description=db.service UNIT FILE
+Before=appnet.service
+
+[Service]
+Type=simple
+ExecStart=podman run --name db docker.io/library/alpine:latest
+ExecStop=podman stop db
+ExecStopPost=podman rm db
+
+[Install]
+RequiredBy=appnet.service
+

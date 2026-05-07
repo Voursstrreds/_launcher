@@ -1,0 +1,190 @@
+# 25 nodes. 5 layers, each layer depends on the previous layer.
+# Layer 0 (sources):  S1 S2 S3 S4 S5
+# Layer 1 (process):  P1 P2 P3 P4 P5  — each depends on all of layer 0
+# Layer 2 (reduce):   R1 R2 R3        — each depends on all of layer 1
+# Layer 3 (output):   O1 O2           — each depends on all of layer 2
+# Groups: GL0 contains layer 0, GL1 contains layer 1,
+#         GL2 contains layer 2, GL3 contains layer 3.
+#         GL0→GL1→GL2→GL3 (nested group chain).
+S1:
+  Name: s1
+  Type: Entry
+  Path: /usr/bin/s1
+  Group:
+    - GL0
+
+S2:
+  Name: s2
+  Type: Entry
+  Path: /usr/bin/s2
+  Group:
+    - GL0
+
+S3:
+  Name: s3
+  Type: Entry
+  Path: /usr/bin/s3
+  Group:
+    - GL0
+
+S4:
+  Name: s4
+  Type: Entry
+  Path: /usr/bin/s4
+  Group:
+    - GL0
+
+S5:
+  Name: s5
+  Type: Entry
+  Path: /usr/bin/s5
+  Group:
+    - GL0
+
+P1:
+  Name: p1
+  Type: Entry
+  Path: /usr/bin/p1
+  Depends:
+    - S1
+    - S2
+    - S3
+    - S4
+    - S5
+  Group:
+    - GL1
+
+P2:
+  Name: p2
+  Type: Entry
+  Path: /usr/bin/p2
+  Depends:
+    - S1
+    - S2
+    - S3
+    - S4
+    - S5
+  Group:
+    - GL1
+
+P3:
+  Name: p3
+  Type: Entry
+  Path: /usr/bin/p3
+  Depends:
+    - S1
+    - S2
+    - S3
+    - S4
+    - S5
+  Group:
+    - GL1
+
+P4:
+  Name: p4
+  Type: Entry
+  Path: /usr/bin/p4
+  Depends:
+    - S1
+    - S2
+    - S3
+    - S4
+    - S5
+  Group:
+    - GL1
+
+P5:
+  Name: p5
+  Type: Entry
+  Path: /usr/bin/p5
+  Depends:
+    - S1
+    - S2
+    - S3
+    - S4
+    - S5
+  Group:
+    - GL1
+
+R1:
+  Name: r1
+  Type: Entry
+  Path: /usr/bin/r1
+  Depends:
+    - P1
+    - P2
+    - P3
+    - P4
+    - P5
+  Group:
+    - GL2
+
+R2:
+  Name: r2
+  Type: Entry
+  Path: /usr/bin/r2
+  Depends:
+    - P1
+    - P2
+    - P3
+    - P4
+    - P5
+  Group:
+    - GL2
+
+R3:
+  Name: r3
+  Type: Entry
+  Path: /usr/bin/r3
+  Depends:
+    - P1
+    - P2
+    - P3
+    - P4
+    - P5
+  Group:
+    - GL2
+
+O1:
+  Name: o1
+  Type: Entry
+  Path: /usr/bin/o1
+  Depends:
+    - R1
+    - R2
+    - R3
+  Group:
+    - GL3
+
+O2:
+  Name: o2
+  Type: Entry
+  Path: /usr/bin/o2
+  Depends:
+    - R1
+    - R2
+    - R3
+  Group:
+    - GL3
+
+GL0:
+  Name: gl0
+  Type: Group
+  Group:
+    - GL1
+
+GL1:
+  Name: gl1
+  Type: Group
+  Group:
+    - GL2
+
+GL2:
+  Name: gl2
+  Type: Group
+  Group:
+    - GL3
+
+GL3:
+  Name: gl3
+  Type: Group

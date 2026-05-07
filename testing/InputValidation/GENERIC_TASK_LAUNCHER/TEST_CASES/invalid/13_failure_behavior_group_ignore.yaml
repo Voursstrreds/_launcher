@@ -1,0 +1,6 @@
+# FailureBehavior: Ignore is not valid on Groups either — Groups only accept
+# FailureBehavior: Abort (targets have no Service section to carry Restart=).
+Group1:
+  Name: group1
+  Type: Group
+  FailureBehavior: Ignore

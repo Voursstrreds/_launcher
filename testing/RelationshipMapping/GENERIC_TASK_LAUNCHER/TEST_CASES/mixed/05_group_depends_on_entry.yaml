@@ -1,0 +1,22 @@
+# Group itself has a Depends on an entry.
+# G1 depends on A. B belongs to G1 (via Members).
+# Expected before:     A -> [G1], B -> [], G1 -> []
+# Expected group_of:   B -> [G1], A -> [], G1 -> []
+# Expected members_of: G1 -> [B], A -> [], B -> []
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+
+G1:
+  Name: g1
+  Type: Group
+  Depends:
+    - A
+  Members:
+    - B

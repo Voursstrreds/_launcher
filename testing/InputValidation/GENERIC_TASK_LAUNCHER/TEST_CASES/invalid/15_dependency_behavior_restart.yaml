@@ -1,0 +1,7 @@
+# Restart is a FailureBehavior value, not a DependencyBehavior value.
+# DependencyBehavior only accepts Ignore/Cascade.
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+  DependencyBehavior: Restart

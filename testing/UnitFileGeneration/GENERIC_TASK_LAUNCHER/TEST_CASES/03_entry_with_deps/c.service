@@ -1,0 +1,10 @@
+[Unit]
+Description=c.service UNIT FILE
+Before=b.service
+
+[Service]
+ExecStart=/usr/bin/c
+
+[Install]
+RequiredBy=b.service
+

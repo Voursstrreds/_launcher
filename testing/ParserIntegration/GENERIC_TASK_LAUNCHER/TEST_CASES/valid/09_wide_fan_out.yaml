@@ -1,0 +1,36 @@
+# A depends on B,C,D,E,F — wide fan-out.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+    - C
+    - D
+    - E
+    - F
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+
+C:
+  Name: c
+  Type: Entry
+  Path: /usr/bin/c
+
+D:
+  Name: d
+  Type: Entry
+  Path: /usr/bin/d
+
+E:
+  Name: e
+  Type: Entry
+  Path: /usr/bin/e
+
+F:
+  Name: f
+  Type: Entry
+  Path: /usr/bin/f

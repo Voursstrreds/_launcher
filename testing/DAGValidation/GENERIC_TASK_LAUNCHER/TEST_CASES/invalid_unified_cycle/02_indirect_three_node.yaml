@@ -1,0 +1,23 @@
+# A is member of G (A before G). B depends on G (G before B). A depends on B (B before A).
+# Dep graph: A→B, B→G. Acyclic.
+# Group graph: A→G. Acyclic.
+# Unified before: A→[G], G→[B], B→[A]. Cycle: A→G→B→A.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+  Group:
+    - G
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Depends:
+    - G
+
+G:
+  Name: g
+  Type: Group

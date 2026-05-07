@@ -1,0 +1,27 @@
+# Depends, Group, Members given as space-separated strings.
+# normalise() should split them into lists.
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+  Depends: Program2 Program3
+
+Program2:
+  Name: program2
+  Type: Entry
+  Path: /usr/bin/true
+
+Program3:
+  Name: program3
+  Type: Entry
+  Path: /usr/bin/false
+
+Group1:
+  Name: group1
+  Type: Group
+  Members: Program1 Program2
+  Group: Group2
+
+Group2:
+  Name: group2
+  Type: Group

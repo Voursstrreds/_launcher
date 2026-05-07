@@ -1,0 +1,50 @@
+# Dense: heavy deps + heavy groups.
+# B depends on A. C depends on A, B. D depends on A, B, C.
+# G1 Members: [A, B]. G2 Members: [C, D]. C also declares Group: [G1].
+# Expected before:     A -> [B, C, D], B -> [C, D], C -> [D], D -> [], G1 -> [], G2 -> []
+# Expected group_of:   A -> [G1], B -> [G1], C -> [G1, G2], D -> [G2], G1 -> [], G2 -> []
+# Expected members_of: G1 -> [A, B, C], G2 -> [C, D], A -> [], B -> [], C -> [], D -> []
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Depends:
+    - A
+
+C:
+  Name: c
+  Type: Entry
+  Path: /usr/bin/c
+  Depends:
+    - A
+    - B
+  Group:
+    - G1
+
+D:
+  Name: d
+  Type: Entry
+  Path: /usr/bin/d
+  Depends:
+    - A
+    - B
+    - C
+
+G1:
+  Name: g1
+  Type: Group
+  Members:
+    - A
+    - B
+
+G2:
+  Name: g2
+  Type: Group
+  Members:
+    - C
+    - D

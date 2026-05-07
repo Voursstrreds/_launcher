@@ -1,0 +1,6 @@
+# Abort is a FailureBehavior value, not a DependencyBehavior value.
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+  DependencyBehavior: Abort

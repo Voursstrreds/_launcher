@@ -1,0 +1,7 @@
+# Minimal Group — no Path field.
+# unit_file_name should be 'grp1.target'.
+# command_string should be '' (no path).
+# path should be None.
+Group1:
+  Name: grp1
+  Type: Group

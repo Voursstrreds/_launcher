@@ -1,0 +1,13 @@
+[Unit]
+Description=c.service UNIT FILE
+Requires=p1.service p2.service
+PartOf=p1.service p2.service
+After=p1.service p2.service
+StartLimitIntervalSec=30
+StartLimitBurst=5
+
+[Service]
+ExecStart=/usr/bin/c
+RestartSec=2
+Restart=on-failure
+

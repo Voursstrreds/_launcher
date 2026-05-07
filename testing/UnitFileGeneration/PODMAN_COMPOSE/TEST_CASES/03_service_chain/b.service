@@ -1,0 +1,15 @@
+[Unit]
+Description=b.service UNIT FILE
+Requires=c.service
+Before=a.service
+After=c.service
+
+[Service]
+Type=simple
+ExecStart=podman run --name b docker.io/library/alpine:latest
+ExecStop=podman stop b
+ExecStopPost=podman rm b
+
+[Install]
+RequiredBy=a.service
+

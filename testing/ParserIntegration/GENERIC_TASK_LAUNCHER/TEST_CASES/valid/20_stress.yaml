@@ -1,0 +1,137 @@
+# 19 nodes: 15 entries, 4 groups, 2 nesting levels.
+# Deps: A→B,C. B→D. C→D. D→E,F. F→G. H→I. I→J. K→L.
+# Groups: A,B,C in G1. D,E,F in G2. G,H in G3. G1 in G2. G2 in G4.
+# M,N,O standalone with args.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+    - C
+  Group:
+    - G1
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Depends:
+    - D
+  Group:
+    - G1
+
+C:
+  Name: c
+  Type: Entry
+  Path: /usr/bin/c
+  Depends:
+    - D
+  Group:
+    - G1
+
+D:
+  Name: d
+  Type: Entry
+  Path: /usr/bin/d
+  Depends:
+    - E
+    - F
+  Group:
+    - G2
+
+E:
+  Name: e
+  Type: Entry
+  Path: /usr/bin/e
+  Group:
+    - G2
+
+F:
+  Name: f
+  Type: Entry
+  Path: /usr/bin/f
+  Depends:
+    - G
+  Group:
+    - G2
+
+G:
+  Name: g
+  Type: Entry
+  Path: /usr/bin/g
+  Group:
+    - G3
+
+H:
+  Name: h
+  Type: Entry
+  Path: /usr/bin/h
+  Depends:
+    - I
+  Group:
+    - G3
+
+I:
+  Name: i
+  Type: Entry
+  Path: /usr/bin/i
+  Depends:
+    - J
+
+J:
+  Name: j
+  Type: Entry
+  Path: /usr/bin/j
+
+K:
+  Name: k
+  Type: Entry
+  Path: /usr/bin/k
+  Depends:
+    - L
+
+L:
+  Name: l
+  Type: Entry
+  Path: /usr/bin/l
+
+M:
+  Name: m
+  Type: Entry
+  Path: /usr/bin/m
+  Flag: --daemon
+  Port: "5000"
+
+N:
+  Name: n
+  Type: Entry
+  Path: /usr/bin/n
+  Config: --config=/etc/n.conf
+
+O:
+  Name: o
+  Type: Entry
+  Path: /usr/bin/o
+  Output: /tmp/o.log
+  Verbose: --verbose
+
+G1:
+  Name: g1
+  Type: Group
+  Group:
+    - G2
+
+G2:
+  Name: g2
+  Type: Group
+  Group:
+    - G4
+
+G3:
+  Name: g3
+  Type: Group
+
+G4:
+  Name: g4
+  Type: Group

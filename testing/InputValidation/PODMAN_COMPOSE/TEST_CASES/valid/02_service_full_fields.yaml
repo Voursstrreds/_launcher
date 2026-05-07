@@ -1,0 +1,34 @@
+Db:
+  Name: postgres-db
+  Type: Service
+  Image: docker.io/library/postgres:16
+  ContainerName: postgres-db
+  Ports:
+    - 5432:5432
+  Volumes:
+    - /srv/pgdata:/var/lib/postgresql/data
+  Environment:
+    POSTGRES_USER: admin
+    POSTGRES_DB: mydb
+
+Web:
+  Name: my-webapp
+  Type: Service
+  Image: docker.io/library/nginx:latest
+  ContainerName: my-webapp
+  Depends:
+    - Db
+  Networks:
+    - AppNet
+  Ports:
+    - 8080:80
+  Working_dir: /usr/share/nginx/html
+  Entrypoint: /entrypoint.sh
+  Command:
+    - nginx
+    - -g
+    - daemon off;
+
+AppNet:
+  Name: app-net
+  Type: Network

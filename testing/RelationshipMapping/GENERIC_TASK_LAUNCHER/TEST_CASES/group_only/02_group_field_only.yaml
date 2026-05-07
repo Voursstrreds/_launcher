@@ -1,0 +1,14 @@
+# Member declares Group, group does NOT declare Members.
+# Reconciliation should fill members_of for G1.
+# Expected group_of:   A -> [G1], G1 -> []
+# Expected members_of: G1 -> [A], A -> []
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Group:
+    - G1
+
+G1:
+  Name: g1
+  Type: Group

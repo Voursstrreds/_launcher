@@ -1,0 +1,15 @@
+# Entry with both axes set explicitly — valid.
+# FailureBehavior governs self-crash (Restart-block); DependencyBehavior
+# governs parent-edge directives (PartOf=).
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+
+Program2:
+  Name: program2
+  Type: Entry
+  Path: /usr/bin/true
+  Depends: Program1
+  FailureBehavior: Restart
+  DependencyBehavior: Cascade

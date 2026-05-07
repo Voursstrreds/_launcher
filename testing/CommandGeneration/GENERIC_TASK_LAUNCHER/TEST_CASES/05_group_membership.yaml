@@ -1,0 +1,23 @@
+# A belongs to G1 (declared from member side).
+# B belongs to G1 (declared from group side via Members).
+# After reconciliation:
+# A: group=[G1], members=[]
+# B: group=[G1], members=[]
+# G1: group=[], members=[A, B]
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Group:
+    - G1
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+
+G1:
+  Name: g1
+  Type: Group
+  Members:
+    - B

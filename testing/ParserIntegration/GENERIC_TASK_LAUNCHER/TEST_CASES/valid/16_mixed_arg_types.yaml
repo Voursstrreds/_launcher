@@ -1,0 +1,8 @@
+# Extra args: flag, key=value, path argument.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Flag: --daemon
+  Config: --config=/etc/a.conf
+  Output: /tmp/result.log

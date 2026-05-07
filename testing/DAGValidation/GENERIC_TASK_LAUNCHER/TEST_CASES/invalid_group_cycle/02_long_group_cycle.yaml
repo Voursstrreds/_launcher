@@ -1,0 +1,18 @@
+# G1→G2→G3→G1  (3-group membership cycle).
+G1:
+  Name: g1
+  Type: Group
+  Group:
+    - G2
+
+G2:
+  Name: g2
+  Type: Group
+  Group:
+    - G3
+
+G3:
+  Name: g3
+  Type: Group
+  Group:
+    - G1

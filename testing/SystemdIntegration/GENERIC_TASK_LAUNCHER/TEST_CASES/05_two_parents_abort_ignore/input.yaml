@@ -1,0 +1,26 @@
+# Case 05 — Multi-parent Abort+Ignore. Verifies per-child (not per-edge)
+# emission: one directive set on child uniformly references both parents.
+# Expected emission on child:
+#   Requires=si-05-parent1.service si-05-parent2.service
+#   After=si-05-parent1.service si-05-parent2.service
+#   (no PartOf, no Restart block)
+Parent1:
+  Name: si-05-parent1
+  Type: Entry
+  Path: /home/mehmet/Mehmet/Tez/PROJECT/Utilities/SystemdUnitsTesting/bin/generic-unit
+  Arg1: infinite
+
+Parent2:
+  Name: si-05-parent2
+  Type: Entry
+  Path: /home/mehmet/Mehmet/Tez/PROJECT/Utilities/SystemdUnitsTesting/bin/generic-unit
+  Arg1: infinite
+
+Child:
+  Name: si-05-child
+  Type: Entry
+  Path: /home/mehmet/Mehmet/Tez/PROJECT/Utilities/SystemdUnitsTesting/bin/generic-unit
+  Arg1: infinite
+  Depends: Parent1 Parent2
+  FailureBehavior: Abort
+  DependencyBehavior: Ignore

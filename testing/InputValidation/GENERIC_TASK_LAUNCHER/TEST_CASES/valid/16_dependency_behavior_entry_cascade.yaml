@@ -1,0 +1,12 @@
+# Entry with DependencyBehavior: Cascade — valid. Child inherits parent stop/restart.
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+
+Program2:
+  Name: program2
+  Type: Entry
+  Path: /usr/bin/true
+  Depends: Program1
+  DependencyBehavior: Cascade

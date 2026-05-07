@@ -1,0 +1,140 @@
+# 25 nodes. Deps and groups individually acyclic. Unified cycle is buried deep.
+#
+# Valid backbone: S1→S2→S3→S4→S5 (dep chain)
+#                 T1→T2→T3→T4→T5 (dep chain)
+#                 U1→U2→U3→U4→U5 (dep chain)
+#
+# Hidden unified cycle via groups + cross-deps:
+#   X member of GX. Y depends on GX. X depends on Y.
+#   Dep graph:  X→Y, Y→GX. Acyclic.
+#   Group graph: X→GX. Acyclic.
+#   Unified:    X→GX (member), GX→Y (before from dep), Y→X (before from dep).
+#               Cycle: X→GX→Y→X.
+#
+# W is connected to the backbone via deps on S5 and T5. Innocent.
+S1:
+  Name: s1
+  Type: Entry
+  Path: /usr/bin/s1
+  Depends:
+    - S2
+
+S2:
+  Name: s2
+  Type: Entry
+  Path: /usr/bin/s2
+  Depends:
+    - S3
+
+S3:
+  Name: s3
+  Type: Entry
+  Path: /usr/bin/s3
+  Depends:
+    - S4
+
+S4:
+  Name: s4
+  Type: Entry
+  Path: /usr/bin/s4
+  Depends:
+    - S5
+
+S5:
+  Name: s5
+  Type: Entry
+  Path: /usr/bin/s5
+
+T1:
+  Name: t1
+  Type: Entry
+  Path: /usr/bin/t1
+  Depends:
+    - T2
+
+T2:
+  Name: t2
+  Type: Entry
+  Path: /usr/bin/t2
+  Depends:
+    - T3
+
+T3:
+  Name: t3
+  Type: Entry
+  Path: /usr/bin/t3
+  Depends:
+    - T4
+
+T4:
+  Name: t4
+  Type: Entry
+  Path: /usr/bin/t4
+  Depends:
+    - T5
+
+T5:
+  Name: t5
+  Type: Entry
+  Path: /usr/bin/t5
+
+U1:
+  Name: u1
+  Type: Entry
+  Path: /usr/bin/u1
+  Depends:
+    - U2
+
+U2:
+  Name: u2
+  Type: Entry
+  Path: /usr/bin/u2
+  Depends:
+    - U3
+
+U3:
+  Name: u3
+  Type: Entry
+  Path: /usr/bin/u3
+  Depends:
+    - U4
+
+U4:
+  Name: u4
+  Type: Entry
+  Path: /usr/bin/u4
+  Depends:
+    - U5
+
+U5:
+  Name: u5
+  Type: Entry
+  Path: /usr/bin/u5
+
+X:
+  Name: x
+  Type: Entry
+  Path: /usr/bin/x
+  Depends:
+    - Y
+  Group:
+    - GX
+
+Y:
+  Name: y
+  Type: Entry
+  Path: /usr/bin/y
+  Depends:
+    - GX
+
+W:
+  Name: w
+  Type: Entry
+  Path: /usr/bin/w
+  Depends:
+    - S5
+    - T5
+
+GX:
+  Name: gx
+  Type: Group

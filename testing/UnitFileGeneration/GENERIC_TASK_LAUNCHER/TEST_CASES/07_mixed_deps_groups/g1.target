@@ -1,0 +1,5 @@
+[Unit]
+Description=g1.target UNIT FILE
+Requires=a.service b.service
+After=a.service b.service
+

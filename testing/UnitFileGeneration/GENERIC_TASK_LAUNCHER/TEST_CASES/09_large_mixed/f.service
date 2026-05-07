@@ -1,0 +1,12 @@
+[Unit]
+Description=f.service UNIT FILE
+Requires=e.service
+Before=g2.target
+After=e.service
+
+[Service]
+ExecStart=/usr/bin/f
+
+[Install]
+RequiredBy=g2.target
+

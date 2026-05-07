@@ -1,0 +1,5 @@
+Thing:
+  Name: thing
+  Type: Volume
+  Image: docker.io/library/alpine:latest
+  ContainerName: thing

@@ -1,0 +1,5 @@
+# Unknown discriminator value: 'Worker' is not Entry or Group
+Program1:
+  Name: program1
+  Type: Worker
+  Path: /usr/bin/echo

@@ -1,0 +1,16 @@
+# A depends on G (A starts after G) AND A is member of G (A starts before G).
+# Dep graph: A→G. Acyclic.
+# Group graph: A→G. Acyclic.
+# Unified: A→G (member), G→A (before from dep). Cycle: A→G→A.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - G
+
+G:
+  Name: g
+  Type: Group
+  Members:
+    - A

@@ -1,0 +1,9 @@
+[Unit]
+Description=c.service UNIT FILE
+Requires=p.service
+PartOf=p.service
+After=p.service
+
+[Service]
+ExecStart=/usr/bin/c
+

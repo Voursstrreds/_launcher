@@ -1,0 +1,14 @@
+# Entries with Order field — propagated to manifest.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Depends:
+    - B
+  Order: "1"
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Order: "2"

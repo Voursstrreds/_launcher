@@ -1,0 +1,22 @@
+# Case 06 — Multi-parent Abort+Cascade. Child has PartOf covering both parents.
+# Restarting either parent should cascade to child via PartOf.
+Parent1:
+  Name: si-06-parent1
+  Type: Entry
+  Path: /home/mehmet/Mehmet/Tez/PROJECT/Utilities/SystemdUnitsTesting/bin/generic-unit
+  Arg1: infinite
+
+Parent2:
+  Name: si-06-parent2
+  Type: Entry
+  Path: /home/mehmet/Mehmet/Tez/PROJECT/Utilities/SystemdUnitsTesting/bin/generic-unit
+  Arg1: infinite
+
+Child:
+  Name: si-06-child
+  Type: Entry
+  Path: /home/mehmet/Mehmet/Tez/PROJECT/Utilities/SystemdUnitsTesting/bin/generic-unit
+  Arg1: infinite
+  Depends: Parent1 Parent2
+  FailureBehavior: Abort
+  DependencyBehavior: Cascade

@@ -1,0 +1,12 @@
+# Two-group cycle: G1 in G2, G2 in G1.
+G1:
+  Name: g1
+  Type: Group
+  Group:
+    - G2
+
+G2:
+  Name: g2
+  Type: Group
+  Group:
+    - G1

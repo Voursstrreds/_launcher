@@ -1,0 +1,6 @@
+# DependencyBehavior must be one of Ignore/Cascade. "Bogus" is not allowed.
+Program1:
+  Name: program1
+  Type: Entry
+  Path: /usr/bin/echo
+  DependencyBehavior: Bogus

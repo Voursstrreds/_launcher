@@ -1,0 +1,11 @@
+[Unit]
+Description=appnet.service UNIT FILE
+Requires=basenet.service web.service db.service
+After=basenet.service web.service db.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=podman network create --ignore appnet
+ExecStop=podman network rm appnet
+

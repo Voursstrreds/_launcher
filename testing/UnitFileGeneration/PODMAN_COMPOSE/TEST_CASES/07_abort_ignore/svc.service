@@ -1,0 +1,11 @@
+[Unit]
+Description=svc.service UNIT FILE
+Requires=p.service
+After=p.service
+
+[Service]
+Type=simple
+ExecStart=podman run --name svc docker.io/library/alpine:latest
+ExecStop=podman stop svc
+ExecStopPost=podman rm svc
+

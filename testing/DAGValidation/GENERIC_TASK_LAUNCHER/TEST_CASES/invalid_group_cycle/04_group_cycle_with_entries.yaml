@@ -1,0 +1,26 @@
+# G1 and G2 form a cycle. A and B are innocent members.
+A:
+  Name: a
+  Type: Entry
+  Path: /usr/bin/a
+  Group:
+    - G1
+
+B:
+  Name: b
+  Type: Entry
+  Path: /usr/bin/b
+  Group:
+    - G2
+
+G1:
+  Name: g1
+  Type: Group
+  Group:
+    - G2
+
+G2:
+  Name: g2
+  Type: Group
+  Group:
+    - G1
