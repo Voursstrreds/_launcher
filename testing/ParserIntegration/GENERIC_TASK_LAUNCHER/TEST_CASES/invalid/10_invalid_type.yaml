@@ -1,5 +1,0 @@
-# Type value not in schema.
-A:
-  Name: a
-  Type: NotAType
-  Path: /usr/bin/a

@@ -1,7 +1,0 @@
-[Unit]
-Description=g1.target UNIT FILE
-Before=g2.target
-
-[Install]
-RequiredBy=g2.target
-

@@ -1,5 +1,0 @@
-Web:
-  Name: nginx-web
-  Type: Service
-  Image: docker.io/library/nginx:latest
-  ContainerName: nginx-web

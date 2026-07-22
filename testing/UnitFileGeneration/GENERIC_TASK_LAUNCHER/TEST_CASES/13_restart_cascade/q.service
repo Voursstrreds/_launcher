@@ -1,6 +1,0 @@
-[Unit]
-Description=q.service UNIT FILE
-
-[Service]
-ExecStart=/usr/bin/q
-

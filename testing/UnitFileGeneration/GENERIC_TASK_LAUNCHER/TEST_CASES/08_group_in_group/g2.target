@@ -1,5 +1,0 @@
-[Unit]
-Description=g2.target UNIT FILE
-Requires=g1.target
-After=g1.target
-

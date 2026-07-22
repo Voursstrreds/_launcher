@@ -1,6 +1,0 @@
-# Depends references a non-existent instance
-Program1:
-  Name: program1
-  Type: Entry
-  Path: /usr/bin/echo
-  Depends: NonExistent

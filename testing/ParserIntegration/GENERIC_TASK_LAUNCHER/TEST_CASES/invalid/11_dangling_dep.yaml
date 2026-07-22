@@ -1,7 +1,0 @@
-# Depends references Z which does not exist.
-A:
-  Name: a
-  Type: Entry
-  Path: /usr/bin/a
-  Depends:
-    - Z

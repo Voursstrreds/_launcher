@@ -1,7 +1,0 @@
-# A depends on itself.
-A:
-  Name: a
-  Type: Entry
-  Path: /usr/bin/a
-  Depends:
-    - A

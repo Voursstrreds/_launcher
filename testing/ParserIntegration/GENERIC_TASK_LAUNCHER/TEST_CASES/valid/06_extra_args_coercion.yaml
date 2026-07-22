@@ -1,8 +1,0 @@
-# Extra args with int coercion and relative path.
-A:
-  Name: a
-  Type: Entry
-  Path: ./bin/a
-  Port: 8080
-  Verbose: --verbose
-  Count: 3

@@ -13,7 +13,7 @@ def detect_cycle(adjacency: dict[str, list[str]], graph_name: str) -> None:
     """
     WHITE, GRAY, BLACK = 0, 1, 2
     color = {key: WHITE for key in adjacency}
-    path  = []
+    path: list[str] = []
 
     def dfs(node):
         color[node] = GRAY
@@ -38,204 +38,127 @@ def detect_cycle(adjacency: dict[str, list[str]], graph_name: str) -> None:
             dfs(node)
 
 
-def validate_dag(all_instances: dict, depends_field: str, group_field: str, members_field: str) -> None:
-    """
-    Validates that the dependency graph and the group membership graph
-    are both directed acyclic graphs (DAGs).
-
-    Performs a DFS-based cycle detection on two edge sets:
-
-    1. Dependency edges: instance A lists B in its depends_field means
-       A depends on B, i.e. edge A -> B.
-
-    2. Group membership edges: instance A lists G in its group_field means
-       A is inside G, i.e. edge A -> G. Group G lists M in its
-       members_field means M is inside G, i.e. edge M -> G.
-
-    Raises SystemExit with a descriptive message if a cycle is detected
-    in either graph.
-
-    Parameters
-    ----------
-    all_instances : dict
-        The full normalised validated input dict,
-        { instance_key: field_dict }.
-    depends_field : str
-        The name of the field that carries forward dependencies.
-    group_field : str
-        The field name that lists the groups an instance belongs to.
-    members_field : str
-        The field name that lists the members a group contains.
-    """
-    # --- Dependency graph ---
-    dep_adj: dict[str, list[str]] = {key: [] for key in all_instances}
-    for key, fields in all_instances.items():
-        for dep in fields.get(depends_field, []):
-            if dep in dep_adj:
-                dep_adj[key].append(dep)
-
-    detect_cycle(dep_adj, "Dependency")
-
-    # --- Group membership graph ---
-    grp_adj: dict[str, list[str]] = {key: [] for key in all_instances}
-    for key, fields in all_instances.items():
-        for group_key in fields.get(group_field, []):
-            if group_key in grp_adj:
-                grp_adj[key].append(group_key)
-        for member_key in fields.get(members_field, []):
-            if member_key in grp_adj:
-                grp_adj[member_key].append(key)
-
-    detect_cycle(grp_adj, "Group membership")
-
-
-def compute_before(all_instances: dict, depends_field: str) -> dict[str, list[str]]:
-    """
-    Computes the inverted dependency map across all instances.
-
-    For each instance X, collects every instance Y whose depends_field
-    list contains X. The result is:
-        { X: [Y1, Y2, ...] }
-    meaning X is required by Y1, Y2, ...
-
-    Parameters
-    ----------
-    all_instances : dict
-        The full normalised validated input dict,
-        { instance_key: field_dict }.
-    depends_field : str
-        The name of the field that carries forward dependencies
-        (e.g. 'Depends'). Passed in by the caller so this function
-        carries no rule-set knowledge.
-
-    Returns
-    -------
-    dict[str, list[str]]
-        { instance_key: [keys of instances that depend on it] }
-        Every instance key present in all_instances appears as a key
-        in the result, even if its before-list is empty.
-    """
-    before: dict[str, list[str]] = {key: [] for key in all_instances}
-
-    for key, fields in all_instances.items():
-        for dependency in fields.get(depends_field, []):
-            if dependency in before:
-                before[dependency].append(key)
-
-    return before
-
-
-def compute_group_maps(
+def before_filler(
     all_instances : dict,
-    group_field   : str,
-    members_field : str,
-) -> tuple[dict[str, list[str]], dict[str, list[str]]]:
-    """
-    Computes two complete, mutually consistent group maps by reconciling
-    both the group_field and members_field declarations across all instances.
-
-    An instance may declare its group membership via the group_field, or a
-    group may declare its members via the members_field, or both. This
-    function unifies both directions so neither source is lost.
-
-    Parameters
-    ----------
-    all_instances : dict
-        The full normalised validated input dict,
-        { instance_key: field_dict }.
-    group_field : str
-        The field name that lists the groups an instance belongs to
-        (e.g. 'Group').
-    members_field : str
-        The field name that lists the members a group contains
-        (e.g. 'Members').
-
-    Returns
-    -------
-    group_of : dict[str, list[str]]
-        { instance_key: [group_keys this instance belongs to] }
-        Every instance key appears, even if its list is empty.
-    members_of : dict[str, list[str]]
-        { instance_key: [member_keys this instance contains] }
-        Every instance key appears, even if its list is empty.
-    """
-    group_of   : dict[str, list[str]] = {key: [] for key in all_instances}
-    members_of : dict[str, list[str]] = {key: [] for key in all_instances}
-
-    for key, fields in all_instances.items():
-
-        # Forward: instance declares which groups it belongs to.
-        for group_key in fields.get(group_field, []):
-            if group_key not in group_of[key]:
-                group_of[key].append(group_key)
-            if group_key in members_of and key not in members_of[group_key]:
-                members_of[group_key].append(key)
-
-        # Inverse: group declares which instances are its members.
-        for member_key in fields.get(members_field, []):
-            if member_key not in members_of[key]:
-                members_of[key].append(member_key)
-            if member_key in group_of and key not in group_of[member_key]:
-                group_of[member_key].append(key)
-
-    return group_of, members_of
-
-
-def compute_unified_before(
-    before_map: dict[str, list[str]],
-    group_of:   dict[str, list[str]],
+    after_field   : str,
+    before_field  : str,
 ) -> dict[str, list[str]]:
     """
-    Merges the dependency before_map and the group_of map into a single
-    unified before-after structure.
+    Fills the `before` side of every instance.
 
-    For each instance X:
-        unified_before[X] = before_map[X] + group_of[X]   (deduplicated)
+    For each instance X, the result list is:
+      - X's directly declared `before` (from `before_field`), plus
+      - every peer Y where X appears in Y's `after_field` (Y.after contains
+        X means X starts before Y).
 
-    This means X must start before every instance in unified_before[X]:
-      - before_map[X]: instances that depend on X (from Depends).
-      - group_of[X]:   groups X belongs to (X starts before its groups).
+    "Fills the before field by looking at the after field" — peers' afters
+    are scanned and inverted onto this instance's befores. Direct
+    declarations on the before side are preserved.
 
     Parameters
     ----------
-    before_map : dict[str, list[str]]
-        Inverted dependency map from compute_before().
-    group_of : dict[str, list[str]]
-        Group membership map from compute_group_maps().
+    all_instances : dict
+        { instance_key: { after_field: [...], before_field: [...] } }
+    after_field, before_field : str
+        Field names within each per-instance dict.
 
     Returns
     -------
     dict[str, list[str]]
-        { instance_key: [keys of all instances this key starts before] }
-        Every key from both input dicts appears in the result.
+        { instance_key: fully-filled before list }. Every key in
+        all_instances appears, even if its list is empty.
     """
-    all_keys = dict.fromkeys(list(before_map.keys()) + list(group_of.keys()))
+    result: dict[str, list[str]] = {
+        key: list(fields.get(before_field, []))
+        for key, fields in all_instances.items()
+    }
+
+    for key, fields in all_instances.items():
+        for parent in fields.get(after_field, []):
+            if parent in result and key not in result[parent]:
+                result[parent].append(key)
+
+    return result
+
+
+def after_filler(
+    all_instances : dict,
+    after_field   : str,
+    before_field  : str,
+) -> dict[str, list[str]]:
+    """
+    Fills the `after` side of every instance. Symmetric mirror of
+    `before_filler`.
+
+    For each instance X, the result list is:
+      - X's directly declared `after` (from `after_field`), plus
+      - every peer Y where X appears in Y's `before_field` (Y.before
+        contains X means Y starts before X, equivalently X starts after Y).
+
+    "Fills the after field by looking at the before field" — peers' befores
+    are scanned and inverted onto this instance's afters. Direct
+    declarations on the after side are preserved.
+
+    Returns
+    -------
+    dict[str, list[str]]
+        { instance_key: fully-filled after list }.
+    """
+    result: dict[str, list[str]] = {
+        key: list(fields.get(after_field, []))
+        for key, fields in all_instances.items()
+    }
+
+    for key, fields in all_instances.items():
+        for child in fields.get(before_field, []):
+            if child in result and key not in result[child]:
+                result[child].append(key)
+
+    return result
+
+
+def unify_mappings(
+    map_a : dict[str, list[str]],
+    map_b : dict[str, list[str]],
+) -> dict[str, list[str]]:
+    """
+    Merges two per-key adjacency maps into one.
+
+    The result's keys are the union of map_a and map_b keys; per-key value
+    lists are the deduped concatenation. Used to combine per-mapping
+    after-adjacencies into one unified graph before DAG validation.
+
+    Parameters
+    ----------
+    map_a, map_b : dict[str, list[str]]
+        { key: [neighbours] }. Either may be empty.
+
+    Returns
+    -------
+    dict[str, list[str]]
+        Union of the two adjacency maps, dedupe-preserving insertion order.
+    """
+    all_keys = dict.fromkeys(list(map_a.keys()) + list(map_b.keys()))
     unified: dict[str, list[str]] = {}
-
     for key in all_keys:
-        combined = list(dict.fromkeys(
-            before_map.get(key, []) + group_of.get(key, [])
-        ))
-        unified[key] = combined
-
+        unified[key] = list(dict.fromkeys(map_a.get(key, []) + map_b.get(key, [])))
     return unified
 
 
-def validate_unified_dag(unified_before: dict[str, list[str]]) -> None:
+def validate_unified_mapping_dag(unified_after: dict[str, list[str]]) -> None:
     """
-    Validates that the unified before-after graph is a DAG.
+    Validates that the unified after-graph is a DAG.
 
-    The unified graph merges dependency and group membership edges
-    into a single ordering structure.  A cycle here means the
-    combined constraints are contradictory even if each individual
-    graph (deps, groups) is acyclic on its own.
+    Edge X -> Y in `unified_after` means X must start after Y (X depends on
+    Y across one or more mappings). A cycle here means the combined
+    constraints are contradictory even if each individual mapping's graph
+    is acyclic on its own.
 
-    Raises SystemExit with a descriptive message if a cycle is found.
+    Raises SystemExit with the cycle path on failure.
 
     Parameters
     ----------
-    unified_before : dict[str, list[str]]
-        Merged before map from compute_unified_before().
-        Edge X -> Y means X must start before Y.
+    unified_after : dict[str, list[str]]
+        Merged after-adjacency map from sequential `unify_mappings` calls.
     """
-    detect_cycle(unified_before, "Unified (dependency + group)")
+    detect_cycle(unified_after, "Unified mapping")

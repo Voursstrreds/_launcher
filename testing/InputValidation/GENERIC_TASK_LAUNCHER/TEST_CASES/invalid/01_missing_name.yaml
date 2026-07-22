@@ -1,4 +1,0 @@
-# Missing required field: Name
-Program1:
-  Type: Entry
-  Path: /usr/bin/echo

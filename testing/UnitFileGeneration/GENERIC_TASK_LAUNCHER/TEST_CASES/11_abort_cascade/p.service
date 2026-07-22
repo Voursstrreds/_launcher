@@ -1,6 +1,0 @@
-[Unit]
-Description=p.service UNIT FILE
-
-[Service]
-ExecStart=/usr/bin/p
-

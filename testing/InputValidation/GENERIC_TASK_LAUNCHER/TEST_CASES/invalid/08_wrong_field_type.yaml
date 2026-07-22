@@ -1,7 +1,0 @@
-# Name must be a string, not a list
-Program1:
-  Name:
-    - program1
-    - alias1
-  Type: Entry
-  Path: /usr/bin/echo

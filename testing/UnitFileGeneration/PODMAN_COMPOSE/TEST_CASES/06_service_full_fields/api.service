@@ -1,9 +1,0 @@
-[Unit]
-Description=api.service UNIT FILE
-
-[Service]
-Type=simple
-ExecStart=podman run --name api-ctr -p 8080:8080 -p 9090:9090 -v /opt/data:/data -e ENV=prod -e LOG_LEVEL=info --entrypoint /usr/bin/python --workdir /app docker.io/library/python:3.12 server.py --bind 0.0.0.0
-ExecStop=podman stop api-ctr
-ExecStopPost=podman rm api-ctr
-

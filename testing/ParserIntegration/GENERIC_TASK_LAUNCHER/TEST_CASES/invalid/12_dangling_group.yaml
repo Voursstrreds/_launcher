@@ -1,7 +1,0 @@
-# Group references G9 which does not exist.
-A:
-  Name: a
-  Type: Entry
-  Path: /usr/bin/a
-  Group:
-    - G9

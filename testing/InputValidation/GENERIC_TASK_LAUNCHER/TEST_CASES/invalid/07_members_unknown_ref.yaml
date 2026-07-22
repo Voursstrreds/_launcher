@@ -1,5 +1,0 @@
-# Members references a non-existent instance
-Group1:
-  Name: group1
-  Type: Group
-  Members: NonExistentMember

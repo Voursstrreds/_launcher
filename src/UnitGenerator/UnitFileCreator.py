@@ -1,3 +1,5 @@
+import os
+
 # ---------------------------------------------------------------------------
 # Field name declarations for each systemd unit file section.
 # These are the only valid field names accepted by each section.
@@ -201,7 +203,7 @@ class Unit_File:
 
     def dump_unit_file(self, unit_file_name: str, path: str):
 
-        f = open(path + unit_file_name, 'w')
+        f = open(os.path.join(path, unit_file_name), 'w')
 
         if self.exists_unit:
             f.write('[Unit]\n')
@@ -225,32 +227,3 @@ class Unit_File:
             f.write('\n')
 
         f.close()
-
-
-# ---------------------------------------------------------------------------
-# generate_all — orchestrates unit file creation for all instances.
-# active_rule_set is passed in by the caller (UnitGenerator.py) to avoid a circular
-# import between UnitFileCreator and Builders.
-# ---------------------------------------------------------------------------
-
-def generate_all(instances: list, active_rule_set, output_path: str = './') -> None:
-    """
-    Iterates over all GeneratedCommand instances and produces one systemd
-    unit file per instance.
-
-    active_rule_set is received as a parameter rather than imported, breaking
-    the circular dependency that would arise from importing Builders here
-    while Builders imports Unit_File from this file.
-
-    Parameters
-    ----------
-    instances     : list of GeneratedCommand objects produced by CommandGenerator.
-    active_rule_set : the RuleSetDescriptor instance selected in Rules.py.
-    output_path   : directory where unit files are written. Defaults to the
-                    current working directory. A trailing '/' is ensured.
-    """
-    if not output_path.endswith('/'):
-        output_path += '/'
-
-    for instance in instances:
-        active_rule_set.unit_file_builder(instance, instances, output_path)

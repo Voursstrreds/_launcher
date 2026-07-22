@@ -1,6 +1,0 @@
-[Unit]
-Description=i.service UNIT FILE
-
-[Service]
-ExecStart=/usr/bin/i /tmp/result.log
-

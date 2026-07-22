@@ -1,4 +1,0 @@
-Net:
-  Name: bad-net
-  Type: Network
-  Image: docker.io/library/alpine:latest

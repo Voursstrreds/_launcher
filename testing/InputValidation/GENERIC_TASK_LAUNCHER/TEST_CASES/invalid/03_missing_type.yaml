@@ -1,4 +1,0 @@
-# Missing required field: Type (discriminator)
-Program1:
-  Name: program1
-  Path: /usr/bin/echo

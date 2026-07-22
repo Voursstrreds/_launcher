@@ -1,6 +1,0 @@
-[Unit]
-Description=a.service UNIT FILE
-
-[Service]
-ExecStart=/usr/bin/a --mode=fast --verbose
-

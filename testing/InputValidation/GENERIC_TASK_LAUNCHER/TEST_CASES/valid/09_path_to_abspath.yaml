@@ -1,6 +1,0 @@
-# Path given as a relative path.
-# normalise() should resolve it to an absolute path.
-Program1:
-  Name: program1
-  Type: Entry
-  Path: ./my_program

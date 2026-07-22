@@ -1,6 +1,0 @@
-# Restart is not allowed on a Group — there is no Service section to
-# carry Restart=/RestartSec=. Groups only accept Abort/Ignore.
-Group1:
-  Name: group1
-  Type: Group
-  FailureBehavior: Restart

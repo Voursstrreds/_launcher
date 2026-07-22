@@ -1,9 +1,0 @@
-# Entry with extra args — extra fields become extra_args dict.
-# command_string should be '/usr/bin/echo --verbose --output=/tmp/out'.
-# extra_args should be {'Arg1': '--verbose', 'Arg2': '--output=/tmp/out'}.
-Program1:
-  Name: prog1
-  Type: Entry
-  Path: /usr/bin/echo
-  Arg1: --verbose
-  Arg2: --output=/tmp/out

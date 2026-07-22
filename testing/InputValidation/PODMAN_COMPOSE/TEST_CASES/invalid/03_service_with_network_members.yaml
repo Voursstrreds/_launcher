@@ -1,7 +1,0 @@
-Svc:
-  Name: svc
-  Type: Service
-  Image: docker.io/library/alpine:latest
-  ContainerName: svc
-  Network_members:
-    - SomeOther
